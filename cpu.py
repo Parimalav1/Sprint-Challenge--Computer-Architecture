@@ -108,7 +108,6 @@ class CPU:
             self.reg[reg_a] >>= self.reg[reg_b]
         elif op == 'MOD':
             self.reg[reg_a] %= self.reg[reg_b]
-
         else:
             raise Exception("Unsupported ALU operation")
 
@@ -266,7 +265,7 @@ class CPU:
 
             elif self.ir == NOT:
                 operand1 = self.ram_read(self.pc + 1)
-                self.alu('NOT', operand1)
+                self.alu('NOT', operand1, None)
                 self.pc += 2
 
             elif self.ir == SHL:
@@ -282,9 +281,9 @@ class CPU:
                 self.pc += 3
 
             elif self.ir == MOD:
-                if operand2 != 0:
-                    operand1 = self.ram_read(self.pc + 1)
-                    operand2 = self.ram_read(self.pc + 2)
+                operand1 = self.ram_read(self.pc + 1)
+                operand2 = self.ram_read(self.pc + 2)
+                if self.reg[operand2] != 0:
                     self.alu('MOD', operand1, operand2)
                     self.pc += 3
                 else:
