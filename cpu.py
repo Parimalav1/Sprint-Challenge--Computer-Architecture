@@ -22,6 +22,7 @@ NOT = 0b01101001
 SHL = 0b10101100
 SHR = 0b10101101
 MOD = 0b10100100
+ADDI = 0b10101110
 
 class CPU:
     """Main CPU class."""
@@ -73,8 +74,8 @@ class CPU:
         if op == "ADD":
             self.reg[reg_a] += self.reg[reg_b]
         # Add an `ADDI` extension instruction to add an immediate value to a register
-        # elif op == "ADDI":
-            
+        elif op == "ADDI":
+            self.reg[reg_a] += reg_b  # reg_b will be the immediate value
         elif op == "SUB":
             self.reg[reg_a] -= self.reg[reg_b]
         elif op == "MUL":
@@ -155,6 +156,11 @@ class CPU:
                 operand1 = self.ram_read(self.pc + 1)
                 operand2 = self.ram_read(self.pc + 2)
                 self.alu('ADD', operand1, operand2)
+                self.pc += 3
+            elif self.ir == ADDI:
+                operand1 = self.ram_read(self.pc + 1)
+                operand2 = self.ram_read(self.pc + 2)
+                self.alu('ADDI', operand1, operand2)
                 self.pc += 3
             elif self.ir == HLT:
                 halted = True
