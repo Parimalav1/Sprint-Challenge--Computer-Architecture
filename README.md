@@ -160,6 +160,10 @@ print:
 # TEST5 (address 73):
 00000001 # HLT
 ```
+**INTERVIEW Qs**
+1. The CALL instruction doesn't allow you to pass any arguments. What are some ways to effectively get arguments to a subroutine? Ans: Stack
+2. What's the result of bitwise-AND between 0b110 and 0b011 = 0b010
+3. Convert the 8-bit binary number 0b01111011 to hex = 7B
 
 ## Stretch Problems
 
